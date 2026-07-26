@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz@9..144;wght@400;600;700&family=Caveat:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root and theme variables */
+:root {
+  --primary: #1E3A5F;
+  --text: #1A1A1A;
+  --background: #FAFAF8;
+  --surface: #FFFFFF;
+  --border: #E9E6DA;
+  --muted: #A39F8E;
+}
+
+[data-theme='dark'] {
+  --primary: #6987CD;
+  --text: #FAFAF8;
+  --background: #1A1A1A;
+  --surface: #2D2D2D;
+  --border: #3C3C3C;
+  --muted: #757570;
+}
+
+@layer base {
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-off-white text-ink font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom focus states for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ink-blue-500 ring-offset-2;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible {
+    @apply outline-none;
+  }
+
+  /* Remove default input styles */
+  input,
+  textarea {
+    @apply appearance-none;
+  }
+
+  /* Smooth transitions for theme changes */
+  * {
+    @apply transition-colors duration-300;
+  }
+
+  /* Handwriting font for messages */
+  .font-handwriting {
+    @apply font-handwriting;
+  }
+}
+
+@layer components {
+  /* Card component - premium styling */
+  .card {
+    @apply bg-white rounded-lg border border-cream-200 shadow-card;
+  }
+
+  .card-sm {
+    @apply bg-white rounded-base shadow-sm;
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-lg shadow-elevated;
+  }
+
+  /* Button variants */
+  .btn {
+    @apply px-4 py-2 rounded-base font-medium transition-all duration-250 focus-visible:ring-2 focus-visible:ring-ink-blue-500;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink-blue-900 text-white hover:bg-ink-blue-800 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply btn bg-cream-200 text-ink hover:bg-cream-300;
+  }
+
+  .btn-tertiary {
+    @apply btn bg-transparent text-ink-blue-900 hover:bg-cream-100;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-ink hover:bg-cream-100;
+  }
+
+  .btn-icon {
+    @apply w-10 h-10 p-0 flex items-center justify-center rounded-full;
+  }
+
+  /* Input variants */
+  .input {
+    @apply w-full px-3 py-2 rounded-base border border-cream-300 bg-white text-ink placeholder-muted focus:border-ink-blue-500 focus:ring-1 focus:ring-ink-blue-100;
+  }
+
+  .input-lg {
+    @apply px-4 py-3 text-lg;
+  }
+
+  /* Text utilities */
+  .text-display {
+    @apply text-4xl font-serif font-bold leading-tight tracking-tight;
+  }
+
+  .text-heading {
+    @apply text-2xl font-serif font-bold leading-tight;
+  }
+
+  .text-subheading {
+    @apply text-lg font-semibold leading-snug;
+  }
+
+  .text-body {
+    @apply text-base leading-relaxed;
+  }
+
+  .text-caption {
+    @apply text-sm text-muted leading-relaxed;
+  }
+
+  /* Gradient overlay for images */
+  .gradient-overlay {
+    @apply absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-cream-200 animate-pulse rounded-base;
+  }
+
+  /* Envelope stacking effect */
+  .envelope-stack {
+    position: relative;
+  }
+
+  .envelope-item {
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .envelope-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Message paper card */
+  .message-card {
+    @apply relative rounded-lg bg-white p-4 shadow-card;
+  }
+
+  .message-card.from-me {
+    @apply bg-ink-blue-50;
+  }
+
+  /* Paper texture effect */
+  .paper-texture {
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 2px,
+        rgba(0, 0, 0, 0.02) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.02) 2px,
+        rgba(0, 0, 0, 0.02) 4px
+      );
+  }
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  .card {
+    @apply bg-charcoal border-charcoal;
+  }
+
+  .card-sm,
+  .card-elevated {
+    @apply bg-charcoal;
+  }
+
+  .input {
+    @apply bg-charcoal border-charcoal text-off-white;
+  }
+
+  .message-card {
+    @apply bg-charcoal text-off-white;
+  }
+
+  .message-card.from-me {
+    @apply bg-ink-blue-900/20;
+  }
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    @apply bg-white;
+  }
+}
